@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ankriti — Handcrafted Bags & Jewelry</title>
+  <meta name="description" content="Ankriti - Handcrafted bags, jewelry and more. Shop unique designs made with love.">
+  <link rel="icon" href="data:,"><style>
+    :root{--accent:#d97706;--muted:#666}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:#222}
+    header{background:linear-gradient(90deg,#fff8f1,#fff);border-bottom:1px solid #eee;padding:18px}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:20px;margin:0;color:var(--accent)}
+    nav{margin-left:auto}
+    nav a{margin-left:14px;text-decoration:none;color:var(--muted);font-weight:600}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;padding:28px 0}
+    .hero .lead{font-size:20px;line-height:1.4}
+    .hero .cta{margin-top:12px}
+    .btn{background:var(--accent);color:#111;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:18px 0}
+    .card{border:1px solid #eee;border-radius:12px;padding:12px;background:white}
+    .card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+    .card h3{margin:8px 0 4px;font-size:16px}
+    .price{font-weight:800;color:var(--accent)}
+    .muted{color:#666;font-size:13px}
+
+    .cart{position:fixed;right:18px;bottom:18px;background:white;border:1px solid #eee;padding:12px;border-radius:12px;box-shadow:0 10px 20px rgba(0,0,0,0.06);width:320px;max-height:70vh;overflow:auto}
+    .cart h4{margin:0 0 10px}
+    .cart-item{display:flex;gap:10px;margin-bottom:8px}
+    .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+    .cart-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+
+    footer{border-top:1px solid #f0f0f0;padding:20px 0;margin-top:28px;color:#666}
+
+    @media(max-width:880px){.hero{grid-template-columns:1fr;}
+      .cart{width:92%;left:4%;right:4%}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <circle cx="12" cy="12" r="10" stroke="#f59e0b" stroke-width="1.5" fill="#fff3cd"></circle>
+          <path d="M7 13c1.5-2 4-3 6-3s4.5 1 6 3" stroke="#b45309" stroke-width="1.2" stroke-linecap="round"></path>
+        </svg>
+        <h1>Ankriti</h1>
+        <div style="font-size:12px;color:#999;margin-left:8px">Handcrafted Bags & Jewelry</div>
+      </div>
+      <nav>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h2 style="margin:0 0 6px">Unique, handcrafted bags & jewelry — made with love</h2>
+        <p class="lead">Shop curated pieces inspired by Indian craftsmanship. Lightweight linen, durable leather alternatives, and eco-friendly packaging.</p>
+        <div class="cta"><a class="btn" href="#products">Shop Now</a></div>
+      </div>
+      <div style="background:#fff8ea;border-radius:12px;padding:14px">
+        <strong>Featured:</strong>
+        <ul style="margin:8px 0 0;font-size:14px;color:#444">
+          <li>Limited edition embroidered bag</li>
+          <li>Handmade oxidized jewelry set</li>
+          <li>Free shipping above ₹1999</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="products">
+      <h2>Products</h2>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <section id="about" style="margin-top:22px">
+      <h2>About Ankriti</h2>
+      <p class="muted">Ankriti creates small-batch, handcrafted accessories combining modern style with traditional techniques. Perfect for gifting or everyday use.</p>
+    </section>
+
+    <section id="contact" style="margin-top:22px">
+      <h2>Contact</h2>
+      <p class="muted">Email: hello@ankriti.in (replace with your real email)</p>
+    </section>
+
+    <footer>
+      <div class="container">© Ankriti — All rights reserved</div>
+    </footer>
+  </main>
+
+  <aside class="cart" id="cart">
+    <h4>Cart (<span id="cartCount">0</span>)</h4>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <div>
+        <div class="muted">Total</div>
+        <div style="font-weight:800;font-size:18px">₹<span id="cartTotal">0</span></div>
+      </div>
+      <div>
+        <button id="checkoutBtn" class="btn">Checkout</button>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // Simple product data — replace or fetch from your backend later
+    const products = [
+      {id:1,title:'Embroidered Sling Bag',price:1299,desc:'Hand-stitched cotton sling bag',img:'https://via.placeholder.com/600x400?text=Sling+Bag'},
+      {id:2,title:'Linen Tote',price:899,desc:'Breathable linen tote',img:'https://via.placeholder.com/600x400?text=Linen+Tote'},
+      {id:3,title:'Oxidized Necklace',price:599,desc:'Traditional oxidized pendant',img:'https://via.placeholder.com/600x400?text=Necklace'},
+      {id:4,title:'Beaded Earrings Set',price:399,desc:'Handmade beaded earrings',img:'https://via.placeholder.com/600x400?text=Earrings'},
+      {id:5,title:'Leather-look Wallet',price:699,desc:'Eco leather card wallet',img:'https://via.placeholder.com/600x400?text=Wallet'},
+      {id:6,title:'Gift Box (Small)',price:199,desc:'Premium gift box packaging',img:'https://via.placeholder.com/600x400?text=Gift+Box'}
+    ];
+
+    const cart = {};
+    const productsGrid = document.getElementById('productsGrid');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartTotalEl = document.getElementById('cartTotal');
+
+    function renderProducts(){
+      productsGrid.innerHTML = '';
+      products.forEach(p=>{
+        const card = document.createElement('div');card.className='card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}">
+          <h3>${p.title}</h3>
+          <div class="muted">${p.desc}</div>
+          <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+            <div class="price">₹${p.price}</div>
+            <div><button class="btn" onclick="addToCart(${p.id})">Add</button></div>
+          </div>
+        `;
+        productsGrid.appendChild(card);
+      })
+    }
+
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      cart[id] = cart[id] || {product:p,qty:0};
+      cart[id].qty +=1;
+      renderCart();
+    }
+
+    function removeFromCart(id){
+      if(!cart[id]) return; delete cart[id]; renderCart();
+    }
+
+    function changeQty(id,delta){
+      if(!cart[id]) return; cart[id].qty += delta; if(cart[id].qty<=0) delete cart[id]; renderCart();
+    }
+
+    function renderCart(){
+      cartItemsEl.innerHTML='';
+      let total = 0; let count=0;
+      Object.values(cart).forEach(item=>{
+        const div = document.createElement('div'); div.className='cart-item';
+        div.innerHTML = `
+          <img src="${item.product.img}" alt="${item.product.title}">
+          <div style="flex:1">
+            <div style="font-weight:700">${item.product.title}</div>
+            <div class="muted">₹${item.product.price} x ${item.qty}</div>
+            <div style="margin-top:6px">
+              <button onclick="changeQty(${item.product.id},-1)" style="border:none;background:#eee;padding:6px;border-radius:6px;margin-right:6px">-</button>
+              <button onclick="changeQty(${item.product.id},1)" style="border:none;background:#eee;padding:6px;border-radius:6px">+</button>
+              <button onclick="removeFromCart(${item.product.id})" style="border:none;background:transparent;color:#d00;margin-left:8px">Remove</button>
+            </div>
+          </div>
+        `;
+        cartItemsEl.appendChild(div);
+        total += item.product.price * item.qty; count += item.qty;
+      })
+      cartCountEl.textContent = count;
+      cartTotalEl.textContent = total;
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click',()=>{
+      if(Object.keys(cart).length===0){ alert('Cart empty. Please add products first.'); return; }
+      // Simple checkout simulation
+      const order = Object.values(cart).map(i=>`${i.product.title} x ${i.qty}`).join('\n');
+      alert('Order placed (demo)\n\n'+order+'\n\nTotal: ₹'+cartTotalEl.textContent+'\n\nContact: hello@ankriti.in');
+      // Clear cart
+      for(const k in cart) delete cart[k]; renderCart();
+    })
+
+    // Initialize
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
